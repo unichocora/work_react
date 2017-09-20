@@ -2,10 +2,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
     
 
 module.exports = {
-    entry: {
-        js: './src/main.js',
-        css: './src/main.css',
-    },
+    entry: [
+        './src/main.js', './src/main.css'
+    ],
     output: {path:'/home/ubuntu/workspace/spa-note/public',filename:'bundle.js'},
     module: {
         loaders:[
@@ -32,9 +31,6 @@ module.exports = {
     },
     plugins:[
         new ExtractTextPlugin('bundle.css'),
-    ],
-    postcss:[
-        require('postcss-easy-import')({glob: true}),
     ],
     devtool:'source-map',
 };
