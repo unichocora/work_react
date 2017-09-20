@@ -2,6 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
-    <div>Hello SPA!</div>,
+    <div>Good mornig</div>,
     document.getElementById('app')
 );
