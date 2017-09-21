@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
-    <div>React環境を作ろう!</div>,
+    <div className="ListBox">
+    <button className="Button">New Note</button>
+    <ul className="NoteList"></ul>
+    </div>,
     document.getElementById('app')
 );
 class NoteList{
@@ -13,7 +16,6 @@ class NoteList{
     onClickItem(item){
         this.onSelectItem(item);
     }
-    
     render(){
         return'<ul>&{items}</ul>';
     }
