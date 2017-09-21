@@ -18,3 +18,8 @@ class NoteList{
         return'<ul>&{items}</ul>';
     }
 }
+const Hello = (props) => {
+    return <div className="Hello">
+    Hello{props.name}
+    </div>;
+};
