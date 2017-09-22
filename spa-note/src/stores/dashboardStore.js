@@ -1,38 +1,35 @@
-import{ReduseStore}from 'flux/utils';
+import { ReduceStore } from 'flux/utils';
 import dispatcher from '../dispatcher';
 
-class DashboardStore extends ReduseStore{
-    getInitialState(){
-        return{
-            notes:[],//ノート一覧
-            selectedNoteId:null,//選択しているノートのid
-        };
+class DashboardStore extends ReduceStore {
+  getInitialState() {
+    return { notes: [] };
+  }
+
+  reduce(state, action) {
+    switch (action.type) {
+      case 'note/fetch/my':
+        return Object.assign({}, state, {
+          notes: action.notes,
+        });
+      case 'note/create':
+        return Object.assign({}, state, {
+          notes: [action.note, ...state.notes],
+        });
+      case 'note/update':
+        return Object.assign({}, state, {
+          notes: state.notes.map(note => {
+            return action.id === note.id ? Object.assign({}, note, action.note) : note;
+          }),
+        });
+      case 'note/delete':
+        return Object.assign({}, state, {
+          notes: state.notes.filter(note => note.id !== action.id),
+        });
+      default:
+        return state;
     }
-    reduce(state,action){
-      switch(action.type){
-          case 'note/create':
-              return Object.assign({}, state,{
-                  //
-                  notes:[action.note,...state.notes],
-                  //新規ノートを選択状態にする
-                  selectedNoteId: action.note.id,
-              });
-              default:
-              //対応しないtypeのときはもとのstateを返す
-              return state;
-      }  
-    }
+  }
 }
 
 export default new DashboardStore(dispatcher);
-
-dispatcher.dispatch({
-    //新規ノート作成のときのActionの種類
-    type: 'note/create',
-    //新規ノートのデータ
-    note:{
-        id:1,
-        title:'xxx',
-        body:'xxx',
-    },
-})

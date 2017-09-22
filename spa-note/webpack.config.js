@@ -27,6 +27,11 @@ module.exports = {
         port: 8080,
         inline: true,
         historyApiFallback:true,
+        stats: {
+         version: false,
+         hash: false,
+         chunkModules: false,
+        },
         disableHostCheck: true,
     },
     plugins:[

@@ -1,13 +1,41 @@
-import{dispatch}from '../dispatcher';
-// import NoteAPIClient from '../services/NoteAPIClient';
-import NoteAPIClient from '/home/ubuntu/workspace/spa-note/src/services/NoteAPIClient';
-
+import { dispatch } from '../dispatcher';
+import NoteApiClient from '../services/NoteApiClient';
 
 export default {
-    create({title,body}){
-        NoteAPIClient.createNote({title,body})
-        .then(note =>{
-            dispatch({ type: 'note/create',note});
-        });
-    }
-}
+  fetchMyNotes() {
+    return NoteApiClient.fetchMyNotes().then(notes => {
+      dispatch({ type: 'note/fetch/my', notes });
+    });
+  },
+
+  fetchStarred() {
+    return NoteApiClient.fetchStarredNotes().then(notes => {
+      dispatch({ type: 'note/fetch/starred', notes });
+    });
+  },
+
+  fetch(id) {
+    dispatch({ type: 'note/fetch/before' });
+    return NoteApiClient.fetchNote(id).then(note => {
+      dispatch({ type: 'note/fetch', note });
+    });
+  },
+
+  create() {
+    return NoteApiClient.createNote().then(note => {
+      dispatch({ type: 'note/create', note });
+    });
+  },
+
+  update(id, { title, body }) {
+    return NoteApiClient.updateNote(id, { title, body }).then(() => {
+      dispatch({ type: 'note/update', id, note: { title, body } });
+    });
+  },
+
+  delete(id) {
+    return NoteApiClient.deleteNote(id).then(() => {
+      dispatch({ type: 'note/delete', id });
+    });
+  },
+};

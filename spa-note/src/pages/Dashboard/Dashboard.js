@@ -1,37 +1,43 @@
 import React from 'react';
 import { Container } from 'flux/utils';
-import dashboardStore
- from '../../stores/dashboardStore';
 import NoteAction from '../../actions/NoteAction';
+import dashboardStore from '../../stores/dashboardStore';
+import Button from '../../components/Button/Button';
+import NoteList from '../../components/NoteList/NoteList';
 
-class Dashboard extends React.Component{
- static getStores(){
-     return [dashboardStore];
- }   
- static calculateState(){
-     return dashboardStore.getState();
- }
- render(){
-     const{ notes,selectedNoteId } = this.state;
-     const selectedNote = notes.find(note => {
-         return selectedNoteId === note.id;
-     });
-     
-     return <div className="page-Dashboard">
+class Dashboard extends React.Component {
+  static getStores() {
+    return [dashboardStore];
+  }
+
+  static calculateState() {
+    return dashboardStore.getState();
+  }
+
+  componentDidMount() {
+    NoteAction.fetchMyNotes();
+  }
+
+  handleClickNew() {
+    NoteAction.create();
+  }
+
+  render() {
+    const note = this.state.notes.find(note => note.id === Number(this.props.params.id));
+    return <div className="page-Dashboard">
       <div className="page-Dashboard-list">
-       <div className="page-Dashboard-listHeader">
-        <Button onClick={NoteAction.create}>
-         New Note
-        </Button>
-       </div>
-       <NoteList notes={notes}
-        selectedNoteId={selectedNoteId}
-       />
+        <div className="page-Dashboard-listHeader">
+          <Button onClick={() => this.handleClickNew()}>New Note</Button>
+        </div>
+        <div role="navigation">
+          <NoteList notes={this.state.notes} selectedNoteId={this.props.params.id} />
+        </div>
       </div>
-      <div className="page-Dashboard-main">
-       <NoteEditor note={selectedNote} />
+      <div className="page-Dashboard-main" role="form">
+        {this.props.children ? React.cloneElement(this.props.children, { note: note }) : null}
       </div>
-     </div>;
- }
+    </div>;
+  }
 }
+
 export default Container.create(Dashboard);

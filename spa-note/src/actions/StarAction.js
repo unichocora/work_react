@@ -1,5 +1,5 @@
 import { dispatch } from '../dispatcher';
-import NoteApiClient from '../services/NoteAPIClient';
+import NoteApiClient from '../services/NoteApiClient';
 
 export default {
   create(noteId) {
