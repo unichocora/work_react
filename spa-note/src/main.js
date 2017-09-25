@@ -48,14 +48,14 @@ ReactDOM.render((
 
 ), document.getElementById('app'));
 
-//   const CheckBoxItem=({
-//   name,
-//   value,
-//   label,
-//   checked,
-//   onChange
-// }) => (
-//   <label className="CheckBoxItem">
-//   <input className="checkbox u-for-at" type="checkbox" name={name} value={value} checked={checked} onChange={onChange} />
-//   <span className="fake" />{label} </label>);
+  const CheckBoxItem=({
+  name,
+  value,
+  label,
+  checked,
+  onChange
+}) => (
+  <label className="CheckBoxItem">
+  <input className="checkbox u-for-at" type="checkbox" name={name} value={value} checked={checked} onChange={onChange} />
+  <span className="fake" />{label} </label>);
   
