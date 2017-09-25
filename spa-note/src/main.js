@@ -20,11 +20,7 @@
 //         return'<ul>&{items}</ul>';
 //     }
 // }
-// const Hello = (props) => {
-//     return <div className="Hello">
-//     Hello{props.name}
-//     </div>;
-// };
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
@@ -34,6 +30,12 @@ import Note from './pages/Note/Note';
 import NoteEdit from './pages/Dashboard/NoteEdit/NoteEdit';
 // import Starred from '/home/ubuntu/workspace/spa-note/src/pages/Starred/Starred';
 import Starred from './pages/Starred/Starred';
+
+const Hello = (props) => {
+    return <div className="Hello">
+    Hello{props.name}
+    </div>;
+};
 
 ReactDOM.render((
   <Router history={browserHistory}>
@@ -57,5 +59,22 @@ ReactDOM.render((
 }) => (
   <label className="CheckBoxItem">
   <input className="checkbox u-for-at" type="checkbox" name={name} value={value} checked={checked} onChange={onChange} />
-  <span className="fake" />{label} </label>);
+  <span className="fake" />{label} 
+  </label>
+  );
   
+  var CommentBox = React.createClass({
+          render: function() {
+            return (
+              <div className="commentBox">
+                Hello, world! I am a CommentBox.
+              </div>
+            );
+          }
+        });
+        
+      
+  ReactDOM.render(
+   <CommentBox />,
+   document.getElementById('content')
+  );
