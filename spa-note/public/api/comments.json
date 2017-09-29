@@ -1,11 +1,12 @@
 [
     {
-        "base": "USD", 
-        "id": 1, 
-        "rates": [
-            "3.673009", 
-            "3.673009"
-        ], 
-        "timestamp": 1506495600
-    }
+"disclaimer": "Usage subject to terms: https://openexchangerates.org/terms",
+"license": "https://openexchangerates.org/license",
+"timestamp": 1506574800,
+"base": "USD",
+"rates":{
+"USD": 3.673097,
+"JPY": 3.673097
+}
+}
 ]
